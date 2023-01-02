@@ -1,0 +1,19 @@
+.app-new{
+    color:black ;
+    padding:110px;
+    text-align: center;
+    background: url('./img.jpg') no-repeat;
+    background-size: 10000px;
+
+    
+    
+    
+}
+.patheya{
+    position:absolute;
+    top: 80%;
+    left: 80%;
+    transform: translate(-80%, -80%);
+    width: 30%;
+    background: url('./logo-dark.png');
+}
