@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { AppBar, ListItem, List } from "material-ui";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import MuiThemeProvider from "@mui/material/ThemeProvider";
+import { AppBar, ListItem, List } from "@mui/material";
+import ArrowForwardIcon from "@mui/material/ArrowForwardIcon";
+import ArrowBackIcon from "@mui/material/ArrowBackIcon";
 
 export class Confirm extends Component {
   render() {

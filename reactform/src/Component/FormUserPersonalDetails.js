@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { TextField, AppBar } from "material-ui";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { TextField, AppBar } from "@mui/material";
+import ArrowForwardIcon from '@mui/material/ArrowForwardIcon';
+import ArrowBackIcon from '@mui/material';
 
 class FormPersonalDetails extends Component {
   render() {

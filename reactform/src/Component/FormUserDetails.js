@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { TextField, AppBar } from "material-ui";
-import { MuiThemeProvider } from "material-ui/styles";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { TextField, AppBar } from "@mui/material";
+import { MuiThemeProvider } from "@mui/material";
+import ArrowForwardIcon from '@mui/material/icons/ArrowForward';
 export class FormUserDetails extends Component {
 
   render() {
