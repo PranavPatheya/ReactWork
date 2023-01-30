@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { Box, Button, Checkbox, Container, CssBaseline, FormControl, FormControlLabel, FormGroup,  FormLabel, InputLabel, Link, MenuItem,
-     Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Container, CssBaseline, FormControl, FormControlLabel, FormGroup,  FormLabel, InputLabel, MenuItem,
+     Radio, RadioGroup, Select, TextField, } from '@mui/material';
 import { useState } from "react";
 import Confirmation from './Confirmation';
+//  import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 
 const Form=(props)=> {
@@ -11,33 +12,28 @@ const Form=(props)=> {
     const[lastname, setLastName]=useState("" );
     const [gender, setGender]=useState("" );
     const [age, setAge]=useState(" ");
-    const[DeveloperIn,setCourse]=useState(" ");
-    // const[checked,setChecked]=useState(" ");
-    const [coffee, setCheckBox1] = useState();
-    const[coffee2, setCheckBox2]=useState();
-    const[coffee3, setCheckBox3]=useState();
-    const[coffee4, setCheckBox4]=useState();
-    //  const[label,setLabel]=useState("");
-
-     const [completeForm, setCompleteForm]=useState( );
-     const[formToPropagate, setFormToPropagate]=useState( );
+    const [courses, setTechnology] = useState("");
+    
+    const[selectedCoffees, setSelectedCoffees] = useState([]);
+    
+    const [completeForm, setCompleteForm]=useState( );
+    const[formToPropagate, setFormToPropagate]=useState( );
+     
 
     const onFirstNameChange= (event) =>{
-        // console.log('event>>',event.target.value);
         setFirstName(event.target.value);
         const form={...completeForm};
         form.firstname=event.target.value;
         setCompleteForm(form);
 }; 
 const onChangeMiddleName = (event) =>{
-    // console.log('event>>',event.target.value);
+    
     setMiddleName(event.target.value);
     const form={...completeForm};
-    form.middlename=event.target.value;
+    form.middlename=event.target.value;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     setCompleteForm(form);
 };
 const onChangeLastName = (event) =>{
-    // console.log('event>>',event.target.value);
     setLastName(event.target.value);
     const form={...completeForm};
     form.lastname=event.target.value;
@@ -56,10 +52,11 @@ const handleAgeChange=(event)=>{
     setCompleteForm(form);
 };
 
-const handleDevpChange=(event)=>{
-    setCourse(event.target.value)
-    const form={...completeForm};
-    form.DeveloperIn=event.target.value;
+const handleDevloperChange = (event) => {
+    setTechnology(event.target.value);
+    const form = { ...completeForm }
+    form.courses = event.target.value;
+
     setCompleteForm(form);
 };
 
@@ -68,47 +65,57 @@ const handleDevpChange=(event)=>{
    setFormToPropagate(completeForm);
   };
 
-  const onCheckBox1Change = (event) => {
-    setCheckBox1(event.target.value);
-    const form = { ...completeForm };
-    form.coffee = event.target.value;
+  const handleCoffeeChange = (event,type) => {
+    console.log('${type} value is - ${event.target.checked}');
 
-    setCompleteForm(form);
-}
-const onCheckBox2Change = (event) => {
-    setCheckBox2(event.target.value);
-    const form = { ...completeForm };
-    form.coffee2 = event.target.value;
+    if (event.target.checked) {
+        const temp = [...selectedCoffees];
+        temp.push(type);
+        setSelectedCoffees(temp);
 
-    setCompleteForm(form);
-}
+        const form = { ...completeForm };
+        form.selectedCoffees = temp;
+        setCompleteForm(form);
+    } else {
+         
+        const temp = [];
+        selectedCoffees.forEach((coffee) => {
+            if (coffee !== type) {
+                temp.push(coffee);
+            }
+        });
 
-const onCheckBox3Change = (event) => {
-    setCheckBox3(event.target.value);
-    const form = { ...completeForm };
-    form.coffee3 = event.target.value;
+        setSelectedCoffees(temp);
 
-    setCompleteForm(form);
-}
-const onCheckBox4Change = (event) => {
-    setCheckBox4(event.target.value);
-    const form = { ...completeForm };
-    form.coffee4 = event.target.value;
+        const form = {... completeForm};
+        form.selectedCoffees = temp;
+        setCompleteForm(form);
+    }  
+};
 
-    setCompleteForm(form);
-}
+
 
  useEffect(() => {
     setGender('male');
     setAge(20);
 }, [setGender]);
+useEffect(() => {
+    localStorage.setItem("FirstName", JSON.stringify(firstname))
+    localStorage.setItem("Middlename", JSON.stringify(middlename))
+    localStorage.setItem("Lastname", JSON.stringify(lastname))
+    localStorage.setItem("Gender", JSON.stringify(gender))
+    localStorage.setItem("Age", JSON.stringify(age))
+    localStorage.setItem("Courses", JSON.stringify(courses))
+    localStorage.setItem("SelectedCoffees", JSON.stringify(selectedCoffees))                 
+});
+
 
 return (
     <>
       <React.Fragment>
           <CssBaseline />
           <Container maxWidth="md">
-             {/* <Typography variant='h3'>Form</Typography> */}
+             
              <Box sx={{display:"flex", flexDirection:'column' ,padding:5,border:' 2px solid black'}} >
              <FormControl >
                   <Box sx={{height:"10px"}}/>
@@ -153,19 +160,58 @@ return (
                       <FormControlLabel value="male" control={<Radio />} label="Male" />
                       <FormControlLabel value="other" control={<Radio />} label="Other" />
                 </RadioGroup><br />
+
+
+
+                <FormControl sx={{width:300,marginLeft:60}}>
+                <FormLabel sx={{color:''}} value={"coffee"} onChange>Coffee I Like</FormLabel>
                 <Box sx={{ display: 'flex' }}>
-                    <FormControl sx={{ width:300,marginLeft:50 }} component="fieldset" variant="standard">
-                    <FormLabel>Coffee I Like</FormLabel>
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox value="coffee " onClick={onCheckBox1Change} name="Espresso" /> } label="Espresso" />
-                        <FormControlLabel control={<Checkbox value="coffee2 "onClick={onCheckBox2Change}name="Cappachinoo" />}label="Cappuccino"/>
-                        <FormControlLabel control={<Checkbox value="coffee3 "onClick={onCheckBox3Change}name="Flatwhite" />}label="Flat white"/>
-                        <FormControlLabel control={<Checkbox value="coffee4 " onClick={onCheckBox4Change} name="Longblack" /> } label="Long black"/>
-                    </FormGroup>
-                    </FormControl>
+                <FormGroup>
+                    <FormControlLabel
+                    control={
+                    <Checkbox
+                    onChange={(event) => handleCoffeeChange (event, "Espresso")}
+                />  
+                }
+                label="Espresso"
+                />
+                <FormControlLabel
+                    control={
+                    <Checkbox
+                    onChange={(event) => handleCoffeeChange (event, "Cappuccino")}
+                />  
+                }
+                label="Cappuccino"
+                />
+                <FormControlLabel
+                    control={
+                    <Checkbox
+                    onChange={(event) => handleCoffeeChange (event, "Flat White")}
+                />  
+                }
+                label="Flat white"
+                />
+                <FormControlLabel
+                    control={
+                    <Checkbox
+                    onChange={(event) => handleCoffeeChange (event, "Long black")}
+                />  
+                }
+                label="Long black"
+                />
+                
+                </FormGroup>
+                
+                
+
+
+
+
+
                 </Box>
-                </Box><br />
-                  {/* <InputLabel id="  ">Age</InputLabel> */}
+                </FormControl>
+                </Box><br/>
+                  
                   <FormControl sx={{width:300}}>
                   <InputLabel id="  ">Age</InputLabel>
       
@@ -178,23 +224,25 @@ return (
                   </Select>
                   <h5>10,20,30 etc.. option</h5> 
 
-                    <FormControl sx={{width:300,marginLeft:60}}>
-                    <InputLabel id=" ">DeveloperIn</InputLabel>
-                  <Select 
-                  labelId="DeveloperIn" 
-                  id="DeveloperIn" 
-                  label="DeveloperIn" 
-                  value={DeveloperIn} 
-                  onChange={handleDevpChange}
-                  >  
-                       <MenuItem value={DeveloperIn}>UI</MenuItem>
-                       <MenuItem value={DeveloperIn}>DataBase</MenuItem>
-                       <MenuItem value={DeveloperIn}>DevOps</MenuItem>
-                       <MenuItem value={DeveloperIn}>API</MenuItem>
-                     
-                  </Select>
-                  <h5>UI,API,DataBase,DevOps Option...</h5>
-                  </FormControl>
+                    
+                  <FormControl sx={{ width: 300, marginLeft: 60 }}>
+                        <InputLabel id=" ">Developer In</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={courses}
+                        label="courses"
+                        onChange={handleDevloperChange}
+                        >
+                                        <MenuItem value={"Database"}>Database</MenuItem>
+                                        <MenuItem value={"API"}>API</MenuItem>
+                                        <MenuItem value={"UI"}>UI</MenuItem>
+                                        <MenuItem value={"Devops"}>Devops</MenuItem>
+                     </Select>
+                     </FormControl>
+
+
+
                     
                     
                     <a
@@ -211,9 +259,10 @@ return (
                     rel="noreferrer"
                     >
                  <button>PatheyaTech Contact</button>
+                 {/* <LinkedInIcon /> */}
                     </a>
 
-
+                
                    
                   </FormControl>
               </FormControl>
@@ -224,9 +273,16 @@ return (
              <Button variant="contained" onClick={handleSubmit} >SUBMIT</Button> 
 
              </Box>
+
+
+             <pre>{JSON.stringify(completeForm, null, 3)}</pre>
+
           </Box>
           </Container><br/>
+
                <Confirmation form ={formToPropagate}/> 
+
+               
                 
       </React.Fragment>
     </> 

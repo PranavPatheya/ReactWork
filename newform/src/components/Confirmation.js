@@ -1,25 +1,44 @@
-import { Box, Button } from '@mui/material';
-import { Container } from '@mui/system';
-import React, { useState } from 'react'
+import React from "react";
+import { CssBaseline, Container, Box } from "@mui/material";
+import Button from "@mui/material/Button";
 
+function Confirmation(props) {
+    const onChangeValue=()=>{
+        alert(JSON.stringify(props.form));
+    }
+    return (
+        <>
+            <CssBaseline />
+            <Container maxWidth="sm">
 
-const Confirmation=(props) =>{
+                <Box
+                    sx={{
+                        bgcolor: "lightgreen",
+                        display: "flex",
+                        padding: 5
+                    }}
+                >
+                    <pre>{JSON.stringify(props.form, null, 2)}</pre>
+                    <br />
+                    
+                    </Box>
+                    <Box sx={{
+                        marginY:2,
+                        display:"flex",
+                        justifyContent:"flex-end",
+                        
+                        
+                    
+        
+                    }}>
+                        <Button variant="contained" color="success"onClick={onChangeValue}>
+                            Confirm
+                        </Button>
+                    </Box>
+                
+            </Container>
+        </>
 
-  
-
-  return (
-   <Container maxWidth='md'>
-    <Box sx={{bgcolor:'light',display:'flex',flexDirection:'row',justifyContent:'center'}}><h3>Confirm Your Form</h3></Box>
-    <Box sx={{display:'flex', bgcolor:'aquamarine',padding:5}}>
-        <pre>{JSON.stringify(props.form,null,3)}</pre>
-        <br />
-        </Box>
-        <Box sx={{display:'flex',marginY:2,justifyContent:'flex-end'}}>
-          <Button variant="contained" color="success" >Confirm </Button>
-          </Box>
-   </Container>
-  
-  )
+    );
 }
-
 export default Confirmation;
